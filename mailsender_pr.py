@@ -33,7 +33,7 @@ def send_email_with_attach(host, FROM, SUBJECT, send_to, path_to_file, password)
         attachment = MIMEBase('data', "octet-stream")
         attachment.set_payload(data)
         encoders.encode_base64(attachment)
-        attachment.add_header('Content-Disposition', 'attachment; filename="РЕКВИЗИТЫ.docx"')
+        attachment.add_header('Content-Disposition', 'attachment', filename=path_to_file)
         msg.attach(attachment)
     except IOError:
         msg = "Error opening attachment file %s" % path_to_file
@@ -46,7 +46,6 @@ def send_email_with_attach(host, FROM, SUBJECT, send_to, path_to_file, password)
     server.quit()
 
 i = TO.__len__() - 1
-print(i)
 while i >= 0:
     print(TO[i])
     path_to_file = "РЕКВИЗИТЫ.docx"
